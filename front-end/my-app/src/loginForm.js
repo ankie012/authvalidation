@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const UserForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,19 @@ const UserForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const data = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      age: formData.age,
+    }
+    axios.post('http://localhost:3000/createUser',data).then((response) => {
+      console.log('Sucess',response.data);
+    }).catch((error) => {
+      // Handle errors
+      console.error('Error:', error);
+    });
     // Handle form submission (e.g., sending data to the server)
     console.log(formData);
   };
