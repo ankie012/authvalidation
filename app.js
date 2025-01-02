@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.get('/',(req,res) => {
   
 })
-
+console.log('hello bro ')
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
