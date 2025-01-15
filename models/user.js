@@ -12,14 +12,9 @@ const createUserSchema = mongoose.Schema({
   age: { type: String, required: true }
 });
 
-// const loginUserSchema = mongoose.Schema({
-//   username: String,
-//   password: String,
-// });
 
-// Export models with unique names
 const CreateUser = mongoose.model("CreateUser", createUserSchema);
-// const LoginUser = mongoose.model("LoginUser", loginUserSchema);
+
 
 module.exports = {
   CreateUser

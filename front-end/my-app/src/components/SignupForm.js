@@ -28,6 +28,13 @@ const SignUp = () => {
     }
     axios.post('http://localhost:5000/signUp',data).then((response) => {
       console.log('Sucess',response.data);
+      setFormData({
+        username: '',
+        password: '',
+        email: '',
+        age: '',
+      });
+      window.location.href = 'http://localhost:3000/signin'
     }).catch((error) => {
       // Handle errors
       console.error('Error:', error);

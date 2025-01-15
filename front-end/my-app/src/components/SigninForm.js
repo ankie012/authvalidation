@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignInForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,12 +28,17 @@ const SignInForm = () => {
     axios.post('http://localhost:5000/signIn', data)
       .then((response) => {
         console.log('Login Success:', response.data);
-        // Add your login success logic here
+        setFormData({
+          username: '',
+          password: '',
+        });
+        navigate('/'); 
       })
       .catch((error) => {
         console.error('Login Error:', error);
         // Add your error handling logic here
       });
+
   };
 
   return (
