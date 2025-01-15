@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UserForm = () => {
+const SignInForm = () => {
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
-    age: '',
   });
 
   const handleChange = (e) => {
@@ -22,23 +20,23 @@ const UserForm = () => {
 
     const data = {
       username: formData.username,
-      email: formData.email,
       password: formData.password,
-      age: formData.age,
-    }
-    axios.post('http://localhost:3000/createUser',data).then((response) => {
-      console.log('Sucess',response.data);
-    }).catch((error) => {
-      // Handle errors
-      console.error('Error:', error);
-    });
-    // Handle form submission (e.g., sending data to the server)
-    console.log(formData);
+    };
+
+    axios.post('http://localhost:5000/signIn', data)
+      .then((response) => {
+        console.log('Login Success:', response.data);
+        // Add your login success logic here
+      })
+      .catch((error) => {
+        console.error('Login Error:', error);
+        // Add your error handling logic here
+      });
   };
 
   return (
     <div style={styles.container}>
-      <h2>Create User</h2>
+      <h2>Sign In</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <div style={styles.inputGroup}>
           <label htmlFor="username" style={styles.label}>Username</label>
@@ -47,19 +45,6 @@ const UserForm = () => {
             id="username"
             name="username"
             value={formData.username}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-
-        <div style={styles.inputGroup}>
-          <label htmlFor="email" style={styles.label}>Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
             onChange={handleChange}
             required
             style={styles.input}
@@ -79,21 +64,8 @@ const UserForm = () => {
           />
         </div>
 
-        <div style={styles.inputGroup}>
-          <label htmlFor="age" style={styles.label}>Age</label>
-          <input
-            type="text"
-            id="age"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-
         <div style={styles.buttonGroup}>
-          <button type="submit" style={styles.button}>Submit</button>
+          <button type="submit" style={styles.button}>Sign In</button>
         </div>
       </form>
     </div>
@@ -145,4 +117,4 @@ const styles = {
   },
 };
 
-export default UserForm;
+export default SignInForm;
