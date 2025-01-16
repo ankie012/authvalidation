@@ -28,11 +28,13 @@ const SignInForm = () => {
     axios.post('http://localhost:5000/signIn', data)
       .then((response) => {
         console.log('Login Success:', response.data);
+        const { token } = response.data; // Get the token from the response
+        localStorage.setItem('token', token);
         setFormData({
           username: '',
           password: '',
         });
-        navigate('/'); 
+        navigate('/dashboard');
       })
       .catch((error) => {
         console.error('Login Error:', error);

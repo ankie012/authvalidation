@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { CreateUser }= require("./models/user");
+const authenticateToken = require('./middleware/authtoke')
 const cors = require('cors');
 
 
@@ -14,9 +15,13 @@ app.use(cookieParser());
 app.use(express.json());  
 app.use(cors());
 
-app.post('/signUp', async(req, res) => {
-  
 
+app.get('/dashboard', authenticateToken, (req, res) => {
+  res.status(200).json({ message: 'Welcome to the home page!', user: req.user });
+});
+
+
+app.post('/signUp', async(req, res) => {
   const { username, email, password, age } = req.body;
 
   try{
